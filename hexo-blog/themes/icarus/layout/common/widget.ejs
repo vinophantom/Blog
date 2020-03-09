@@ -24,7 +24,7 @@
     <% get_widgets(position).forEach(widget => {  %>
         <!-- <%- (widget.type=='profile' && !is_home()) %> -->
 
-        <%- (widget.type=='profile' && !is_home())?'':_partial('widget/' + widget.type, { widget }) %>
+        <%- ((widget.type=='profile' && !is_home()) || (is_post() && widget.type!='toc'))?'':_partial('widget/' + widget.type, { widget }) %>
         <!-- <%- _partial('widget/' + widget.type, { widget }) %> -->
     <% }) %>
     <% if (position === 'left') { %>
