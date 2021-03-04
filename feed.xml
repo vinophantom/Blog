@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-03-05T00:41:37+08:00</updated><id>/feed.xml</id><title type="html">JsprX</title><subtitle>Time felt like a luxury i couldn&apos;t afford. Any moment now, my time would end.
+</subtitle><author><name>Jasper Risky Xu</name><email>skt@outlook.sk</email></author><entry><title type="html">使用 Jekyll 构建你的博客</title><link href="/2021/03/03/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-jekyll-%E6%9E%84%E5%BB%BA%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2.html" rel="alternate" type="text/html" title="使用 Jekyll 构建你的博客" /><published>2021-03-03T00:00:00+08:00</published><updated>2021-03-03T00:00:00+08:00</updated><id>/2021/03/03/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20jekyll%20%E6%9E%84%E5%BB%BA%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2</id><content type="html" xml:base="/2021/03/03/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-jekyll-%E6%9E%84%E5%BB%BA%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2.html">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+
+&lt;p&gt;jekyll 是 Github Pages 默认支持的静态网站生成器,它支持类似 Jinjia2 的模板格式 Liquid,而且支持 markdown 格式.&lt;!--more--&gt; 使用它你在第一次配置好后就可以专注于写文档了.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;jekyll-安装与配置&quot;&gt;Jekyll 安装与配置&lt;/h2&gt;
+
+&lt;p&gt;jekyll是一个 ruby 写的静态网站渲染器,它本质上是一个ruby程序.因此我们首先需要有ruby环境.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装ruby环境&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;mac下自带ruby因此不用额外操作.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装 Github Page 相同的 jekyll 环境&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我们使用 jekyll 主要也是为 Github Page 使用. 因此最好使用和 Github Page 一样的环境.&lt;/p&gt;
+
+&lt;p&gt;命令行输入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install bundler&lt;/code&gt; 等待安装完&lt;/p&gt;
+
+&lt;p&gt;命令行输入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install jekyll&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install jekyll-paginate&lt;/code&gt; 等待安装完.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;找模板&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Jekyll 虽然完全可以自己配置样式.但毕竟我们是为了安心写文档,所以不妨找个模板来使用,后续再基于这个模板做修改.一般来说模板可以在 &lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;jekyllthemes&lt;/a&gt;, &lt;a href=&quot;http://github.com/&quot;&gt;github&lt;/a&gt; 上有很多用户会自己构造模板,找到套用就好.&lt;/p&gt;
+
+&lt;p&gt;下载好模板后将模板解压后放到你的项目文件夹,我们稍作修改就可以使用了.&lt;/p&gt;
+
+&lt;h2 id=&quot;jekyll-项目的基本构成&quot;&gt;Jekyll 项目的基本构成&lt;/h2&gt;
+
+&lt;p&gt;你可以看到其中有这样几个文件/文件夹&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; 配置文件&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_drafts&lt;/code&gt; 文件夹,用来存放草稿,当运行jekyll build –drafts后,草稿将会被编译成文章,并自动加上发布如期&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes&lt;/code&gt; 文件夹,保存你网站的部件,你可以加载这些部件到你的布局或者文章中以方便重用.可以用这个标签 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\{\% include file.ext \%\}&lt;/code&gt; 来把文件_includes/file.ext包含进来.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts&lt;/code&gt; 文件夹,layouts 是包裹在文章外部的模板.布局可以在 YAML 头信息中根据不同文章进行选择.标签 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\{\{ content \}\}&lt;/code&gt; 可以将content插入页面中.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; 文件夹,这里放的就是你的文章了.文件格式很重要,必须要符合:YEAR-MONTH-DAY-title.MARKUP. The permalinks可以在文章中自己定制,但是数据和标记语言都是根据文件名来确定的.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_site&lt;/code&gt; ,一旦Jekyll完成转换就会将生成的页面放在这里(默认).最好将这个目录放进你的.gitignore文件中.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;index.html&lt;/code&gt; 如果这些文件中包含 YAML 头信息 部分,Jekyll 就会自动将它们进行转换.当然其他的如.html,.markdown,.md或者.textile等在你的站点根目录下或者不是以上提到的目录中的文件也会被转换.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;css&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;images&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;favicon.ico&lt;/code&gt; 等不用说,就是前端的组件了.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content><author><name>Jasper Xu</name></author><category term="Jekyll" /><category term="Blog" /><summary type="html">Jekyll jekyll 是 Github Pages 默认支持的静态网站生成器,它支持类似 Jinjia2 的模板格式 Liquid,而且支持 markdown 格式.</summary></entry><entry><title type="html">ParallelStream 的正确打开方式</title><link href="/2021/01/02/ParallelStream-%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F.html" rel="alternate" type="text/html" title="ParallelStream 的正确打开方式" /><published>2021-01-02T00:00:00+08:00</published><updated>2021-01-02T00:00:00+08:00</updated><id>/2021/01/02/ParallelStream-%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F</id><content type="html" xml:base="/2021/01/02/ParallelStream-%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F.html">&lt;h1 id=&quot;parallelstream-是什么&quot;&gt;ParallelStream 是什么&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;ParallelStream&lt;/strong&gt; 其实就是一个并行执行的流.它通过默认的ForkJoinPool,&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;可能提高你的多线程任务的速度.&lt;/p&gt;
+
+&lt;!--more--&gt;
+&lt;!-- more --&gt;
+
+&lt;div class=&quot;card&quot;&gt;
+  &lt;div class=&quot;card__content&quot;&gt;
+    &lt;div class=&quot;card__header&quot;&gt;
+      &lt;h4&gt;Fork/Join&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;p&gt;The fork/join framework is an implementation of the ExecutorService interface that helps you take advantage of multiple processors. It is designed for work that can be broken into smaller pieces recursively. The goal is to use all the available processing power to enhance the performance of your application.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;parallelstream-的作用&quot;&gt;ParallelStream 的作用&lt;/h1&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;&lt;strong&gt;ParallelStream&lt;/strong&gt;&lt;/dt&gt;
+  &lt;dd&gt;具有平行处理能力，处理的过程会分而治之，也就是将一个大任务切分成多个小任务，这表示每个任务都是一个操作。&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parallelStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+       &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;out:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;上面的代码我们的到的不是&lt;del&gt;顺序&lt;/del&gt;的1、2、3、4、5…，而是随机的顺序。&lt;/p&gt;
+
+&lt;p&gt;如果需要按照原来的顺序便利，可以使用 forEachOrdered() 方法：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parallelStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+       &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEachOrdered&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;out:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;parallelstream-的实现&quot;&gt;ParallelStream 的实现&lt;/h1&gt;
+
+&lt;p&gt;ParallelStream 是由 ForkJoin 与 ForkJoinPool 实现的。
+ForkJoinPool 使用相对少的线程来处理大量的任务。
+比如有一个任务需要处理100万的数据，那么这个任务会被分割成两个处理50万数据的任务，以此类推，直到任务单元被分割成一个预设的阈值大小的任务，直到这些子任务被执行完，这个任务才将完成。
+这和ThreadPoolExecutor的区别是，ThreadPoolExecutor 处理这个100万的任务会需要100万的线程.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ForkJoinPool 默认的大小等于当前机器的 CPU 核心数。
+可以使用 &lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Djava.util.concurrent.ForkJoinPool.common.parallelism=N&lt;/code&gt; 
+来设置 ForkJoinPool 的大小。&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;程序中的 ParallelStream 共用一个 commonForkJoinPool&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;关于使用-parallelstream-的坑&quot;&gt;关于使用 ParallelStream 的坑&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;ParallelStream&lt;/strong&gt;固然有它强大的地方，但同样的，它也存在着陷阱。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reqs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;nc&quot;&gt;Optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reqs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parallel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findAny&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;上面的代码用来获取第一个返回的请求，注意网络请求属于IO操作，这里面存在在被阻塞的风险，故而这段代码的设计是存在问题。
+前面提到程序中的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ParallelStream&lt;/code&gt; 共用一个 commonForkJoinPool，试想如果这里调用的 API 响应比较慢，那么这段代码就会影响到其他使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ParallelStream&lt;/code&gt; 的地方（&lt;strong&gt;阻塞&lt;/strong&gt;其他任务）。这样的后果往往是不可估量的。&lt;/p&gt;
+
+&lt;h1 id=&quot;如何正确使用-parallelstream&quot;&gt;如何正确使用 ParallelStream&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;首先，我们需要考虑需不需要用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ParallelStream&lt;/code&gt;。&lt;/p&gt;
+
+    &lt;ol class=&quot;task-list&quot;&gt;
+      &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;是否需要并行？&lt;/li&gt;
+      &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;任务之间是否是独立的？是否会引起任何竞态条件？&lt;/li&gt;
+      &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;结果是否取决于任务的调用顺序？&lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;考虑过这三个问题后再决定是否使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ParallelStream&lt;/code&gt;。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;其次，使用指定的不与其他任务冲突的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ForkJoinPool&lt;/code&gt;。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nc&quot;&gt;ForkJoinPool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forkJoinPool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ForkJoinPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;  
+&lt;span class=&quot;n&quot;&gt;forkJoinPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;n&quot;&gt;firstRange&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parallelStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://docs.oracle.com/javase/tutorial/essential/concurrency/forkjoin.html&quot;&gt;Fork/Join&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Jasper Risky Xu</name><email>skt@outlook.sk</email></author><category term="Java" /><category term="Coding" /><summary type="html">ParallelStream 是什么 ParallelStream 其实就是一个并行执行的流.它通过默认的ForkJoinPool,1可能提高你的多线程任务的速度. Fork/Join &amp;#8617;</summary></entry><entry><title type="html">编写卓越的代码——防御性编程</title><link href="/2020/12/03/%E7%BC%96%E5%86%99%E5%8D%93%E8%B6%8A%E7%9A%84%E4%BB%A3%E7%A0%81-%E9%98%B2%E5%BE%A1%E6%80%A7%E7%BC%96%E7%A8%8B.html" rel="alternate" type="text/html" title="编写卓越的代码——防御性编程" /><published>2020-12-03T00:00:00+08:00</published><updated>2020-12-03T00:00:00+08:00</updated><id>/2020/12/03/%E7%BC%96%E5%86%99%E5%8D%93%E8%B6%8A%E7%9A%84%E4%BB%A3%E7%A0%81%E2%80%94%E2%80%94%E9%98%B2%E5%BE%A1%E6%80%A7%E7%BC%96%E7%A8%8B</id><content type="html" xml:base="/2020/12/03/%E7%BC%96%E5%86%99%E5%8D%93%E8%B6%8A%E7%9A%84%E4%BB%A3%E7%A0%81-%E9%98%B2%E5%BE%A1%E6%80%A7%E7%BC%96%E7%A8%8B.html">&lt;h1 id=&quot;编写卓越的代码&quot;&gt;编写卓越的代码&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;软件&lt;strong&gt;工程师&lt;/strong&gt;的智慧，就在于他们是否开始意识到：使程序能用和使程序正确，这两者之间有什么样的差别。
+– M.A.Jackson, &lt;em&gt;《程序设计原理》&lt;/em&gt;
+&lt;!--more--&gt;
+&lt;!-- more --&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;可用的代码&lt;/strong&gt;：提供常规输入集，代码给出常规输出；一旦有意外输入，代码崩溃。&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;正确的代码&lt;/strong&gt;：对于所有输入集，有正确的输出；&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;优秀的代码&lt;/strong&gt;：一定是正确的代码；逻辑容易理解；代码自然；容易维护。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;防御性编程&quot;&gt;防御性编程&lt;/h1&gt;
+
+&lt;p&gt;防御性编程是一种细致、谨慎的编程方法。为了开发可靠的软件，我们要设计系统中的每个组件，以使其尽可能地“保护”自己。我们通过明确地在代码中对设想进行检查，击碎了未记录下来的设想。这是一种努力，防止（或至少是观察）我们的代码以将会展现错误行为的方式被调用。&lt;/p&gt;
+
+&lt;h1 id=&quot;java-中的实践&quot;&gt;Java 中的实践&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html&quot; title=&quot;Integer&quot;&gt;java.lang.Integer.parseInt()&lt;/a&gt; in Java 8.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;radix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NumberFormatException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;NumberFormatException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;null&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;radix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Character&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MIN_RADIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;NumberFormatException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;radix &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;radix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+                                            &lt;span class=&quot;s&quot;&gt;&quot; less than Character.MIN_RADIX&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;radix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Character&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MAX_RADIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;NumberFormatException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;radix &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;radix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+                                            &lt;span class=&quot;s&quot;&gt;&quot; greater than Character.MAX_RADIX&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// 主逻辑&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jasper Risky Xu</name><email>skt@outlook.sk</email></author><category term="Coding" /><category term="Defensive Programming" /><summary type="html">编写卓越的代码 软件工程师的智慧，就在于他们是否开始意识到：使程序能用和使程序正确，这两者之间有什么样的差别。 – M.A.Jackson, 《程序设计原理》</summary></entry><entry><title type="html">Chart demo</title><link href="/2020/03/03/chart.html" rel="alternate" type="text/html" title="Chart demo" /><published>2020-03-03T00:00:00+08:00</published><updated>2020-03-03T00:00:00+08:00</updated><id>/2020/03/03/chart</id><content type="html" xml:base="/2020/03/03/chart.html">&lt;p&gt;this is a chart demo.&lt;/p&gt;
+
+&lt;!--more--&gt;
+&lt;p&gt;&lt;i class=&quot;fas fa-download&quot;&gt;&lt;/i&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-chart&quot;&gt;{
+  &quot;type&quot;: &quot;polarArea&quot;,
+  &quot;data&quot;: {
+    &quot;datasets&quot;: [
+      {
+        &quot;data&quot;: [
+          11,
+          16,
+          7,
+          3,
+          14
+        ],
+        &quot;backgroundColor&quot;: [
+          &quot;#FF6384&quot;,
+          &quot;#4BC0C0&quot;,
+          &quot;#FFCE56&quot;,
+          &quot;#E7E9ED&quot;,
+          &quot;#36A2EB&quot;
+        ],
+        &quot;label&quot;: &quot;My dataset&quot;
+      }
+    ],
+    &quot;labels&quot;: [
+      &quot;Red&quot;,
+      &quot;Green&quot;,
+      &quot;Yellow&quot;,
+      &quot;Grey&quot;,
+      &quot;Blue&quot;
+    ]
+  },
+  &quot;options&quot;: {}
+}
+&lt;/code&gt;&lt;/pre&gt;</content><author><name>Jasper Xu</name></author><category term="TeXt" /><summary type="html">this is a chart demo.</summary></entry><entry><title type="html">TOC</title><link href="/2020/03/02/toc.html" rel="alternate" type="text/html" title="TOC" /><published>2020-03-02T00:00:00+08:00</published><updated>2020-03-02T00:00:00+08:00</updated><id>/2020/03/02/toc</id><content type="html" xml:base="/2020/03/02/toc.html">&lt;p&gt;This is a TOC demo.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;h1_1&quot;&gt;H1_1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-1&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-1&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-2&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-2&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-3&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-3&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-4&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-4&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-5&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-5&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-6&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-6&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2&quot;&gt;H2&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3&quot;&gt;H3&lt;/h3&gt;
+
+&lt;h1 id=&quot;h1_1-1&quot;&gt;H1_1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-7&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-7&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-8&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-8&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-9&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-9&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-10&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-10&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-11&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-11&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-12&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-12&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-13&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-13&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-1&quot;&gt;H2&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3-1&quot;&gt;H3&lt;/h3&gt;
+
+&lt;h1 id=&quot;h1_1-2&quot;&gt;H1_1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-14&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-14&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-15&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-15&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-16&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-16&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-17&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-17&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-18&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-18&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-19&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-19&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-20&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-20&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-2&quot;&gt;H2&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3-2&quot;&gt;H3&lt;/h3&gt;
+
+&lt;h1 id=&quot;h1_1-3&quot;&gt;H1_1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-21&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-21&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-22&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-22&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-23&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-23&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-24&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-24&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-25&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-25&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-26&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-26&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-27&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-27&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-3&quot;&gt;H2&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3-3&quot;&gt;H3&lt;/h3&gt;
+&lt;h1 id=&quot;h1_1-4&quot;&gt;H1_1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-28&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-28&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-29&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-29&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-30&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-30&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-31&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-31&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-32&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-32&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-33&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-33&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-34&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-34&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-4&quot;&gt;H2&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3-4&quot;&gt;H3&lt;/h3&gt;
+&lt;h1 id=&quot;h1_1-5&quot;&gt;H1_1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-35&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-35&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-36&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-36&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-37&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-37&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-38&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-38&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-39&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-39&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-40&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-40&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-41&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-41&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-5&quot;&gt;H2&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3-5&quot;&gt;H3&lt;/h3&gt;
+&lt;h1 id=&quot;h1_1-6&quot;&gt;H1_1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-42&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-42&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-43&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-43&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-44&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-44&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-45&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-45&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-46&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-46&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-47&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-47&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-48&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-48&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-6&quot;&gt;H2&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3-6&quot;&gt;H3&lt;/h3&gt;
+&lt;h1 id=&quot;h1_1-7&quot;&gt;H1_1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-49&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-49&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-50&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-50&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-51&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-51&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-52&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-52&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-53&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-53&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-54&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-54&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-55&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-55&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-7&quot;&gt;H2&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3-7&quot;&gt;H3&lt;/h3&gt;
+&lt;h1 id=&quot;h1_1-8&quot;&gt;H1_1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-56&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-56&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2_1-57&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-57&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-58&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-58&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-59&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-59&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-60&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-60&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-61&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-61&quot;&gt;H1_2&lt;/h1&gt;
+&lt;h2 id=&quot;h2_1-62&quot;&gt;H2_1&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1_2-62&quot;&gt;H1_2&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-8&quot;&gt;H2&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3-8&quot;&gt;H3&lt;/h3&gt;</content><author><name>Jasper Risky Xu</name><email>skt@outlook.sk</email></author><category term="TeXt" /><summary type="html">This is a TOC demo.</summary></entry><entry><title type="html">Code</title><link href="/2020/03/01/code.html" rel="alternate" type="text/html" title="Code" /><published>2020-03-01T00:00:00+08:00</published><updated>2020-03-01T00:00:00+08:00</updated><id>/2020/03/01/code</id><content type="html" xml:base="/2020/03/01/code.html">&lt;p&gt;A Code demo.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;campaignVOs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;campaignVOs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yyyyMMddHHmm&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;campaignVOs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;campaignVO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;campaignVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getEndTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;nc&quot;&gt;UnionFrequencyCapVO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unionFrequencyCapVO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UnionFrequencyCapVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+          &lt;span class=&quot;nc&quot;&gt;Calendar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calendar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Calendar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;calendar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;campaignVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getEndTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;calendar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Calendar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MINUTE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delayMin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+          &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;calendar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;unionFrequencyCapVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;campaignVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;unionFrequencyCapVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setLifecycle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parseLong&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dateunionFrequencyCapVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setFrequencyCaps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;CAMPAIGN_DEFAULT_LIFETIME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freqList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unionFrequencyCapVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;//保存活动的最晚结束时间&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;campaignEndTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;campaignVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unionFrequencyCapVO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getLifecycle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jasper Risky Xu</name><email>skt@outlook.sk</email></author><category term="Coding" /><category term="Test" /><summary type="html">A Code demo.</summary></entry><entry><title type="html">Welcome</title><link href="/2018/07/01/welcome.html" rel="alternate" type="text/html" title="Welcome" /><published>2018-07-01T00:00:00+08:00</published><updated>2018-07-01T00:00:00+08:00</updated><id>/2018/07/01/welcome</id><content type="html" xml:base="/2018/07/01/welcome.html">&lt;p&gt;If you see this page, that means you have setup your site. enjoy! :ghost: :ghost: :ghost:&lt;/p&gt;
+
+&lt;p&gt;You may want to &lt;a href=&quot;https://tianqi.name/jekyll-TeXt-theme/docs/en/configuration&quot;&gt;config the site&lt;/a&gt; or &lt;a href=&quot;https://tianqi.name/jekyll-TeXt-theme/docs/en/writing-posts&quot;&gt;writing a post&lt;/a&gt; next. Please feel free to &lt;a href=&quot;https://github.com/kitian616/jekyll-TeXt-theme/issues&quot;&gt;create an issue&lt;/a&gt; or &lt;a href=&quot;mailto:kitian616@outlook.com&quot;&gt;send me email&lt;/a&gt; if you have any questions.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;你好哇。&lt;/p&gt;
+
+&lt;p&gt;If you like TeXt, don’t forget to give me a star. :star2:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/kitian616/jekyll-TeXt-theme/&quot;&gt;&lt;img src=&quot;https://img.shields.io/github/stars/kitian616/jekyll-TeXt-theme.svg?label=Stars&amp;amp;style=social&quot; alt=&quot;Star This Project&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name>Jasper Xu</name></author><category term="TeXt" /><summary type="html">If you see this page, that means you have setup your site. enjoy! :ghost: :ghost: :ghost: You may want to config the site or writing a post next. Please feel free to create an issue or send me email if you have any questions.</summary></entry><entry><title type="html">Post with Header Image</title><link href="/2018/06/01/header-image.html" rel="alternate" type="text/html" title="Post with Header Image" /><published>2018-06-01T00:00:00+08:00</published><updated>2018-06-01T00:00:00+08:00</updated><id>/2018/06/01/header-image</id><content type="html" xml:base="/2018/06/01/header-image.html">&lt;p&gt;A Post with Header Image, See &lt;a href=&quot;https://tianqi.name/jekyll-TeXt-theme/samples.html#page-layout&quot;&gt;Page layout&lt;/a&gt; for more examples.&lt;/p&gt;
+
+&lt;!--more--&gt;</content><author><name>Jasper Risky Xu</name><email>skt@outlook.sk</email></author><category term="TeXt" /><summary type="html">A Post with Header Image, See Page layout for more examples.</summary></entry></feed>
